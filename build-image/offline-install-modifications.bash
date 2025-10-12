@@ -33,23 +33,28 @@ adoptium_fetch_apt
 
 apt-get --quiet update
 apt-get --quiet upgrade --yes --force-confnew
-apt-get --quiet install --download-only --yes libc6 libstdc++6 zlib1g make \
-  openhab openhab-addons samba amanda-common amanda-server amanda-client exim4 \
-  dnsutils mailutils gdisk screen vim nano mc vfu bash-completion coreutils \
-  htop curl wget multitail git util-linux bzip2 zip unzip xz-utils \
-  software-properties-common man-db whiptail acl usbutils dirmngr arping \
-  apt-transport-https bc sysstat jq moreutils avahi-daemon python3 python3-pip \
-  python3-wheel python3-setuptools fontconfig comitup \
-  dns-root-data dnsmasq-base javascript-common libcairo2 libgudev-1.0-0 \
-  libjs-jquery libmbim-glib4 libmbim-proxy libmm-glib0 libndp0 libnm0 \
-  libpixman-1-0 libqmi-glib5 libqmi-proxy libteamdctl0 libxcb-render0 \
-  libxcb-shm0 libxrender1 modemmanager network-manager python3-blinker \
-  python3-cairo python3-click python3-colorama python3-flask \
+apt-get --quiet install --download-only --yes openhab openhab-addons \
+  acl amanda-common amanda-server amanda-client apt-transport-https arping \
+  avahi-daemon bash-completion bc bzip2 comitup coreutils curl \
+  dnsutils dns-root-data dnsmasq-base dirmngr exim4 fontconfig gdisk git \
+  htop inetutils-telnet iotop javascript-common jq \
+  libblas3 libc6 libcairo2 libgudev-1.0-0 libjs-jquery libmbim-glib4 libgpm2 \
+  liblinear4 liblua5.4-0 libmbim-proxy \
+  libmm-glib0 libndp0 libnet1 libnm0 libpcre2-32-0 \
+  libpixman-1-0 libqmi-glib5 libqmi-proxy libsodium23i libstdc++6 \
+  libteamdctl0 libxcb-render0 libxcb-shm0 libxrender1 libyascreen0 \
+  make man-db mc mc-data mailcap mailutils modemmanager moreutils multitail \
+  nano network-manager nmap nmap-common \
+  python3-blinker python3-cairo python3-click python3-colorama python3-flask \
   python3-itsdangerous python3-jinja2 python3-markupsafe \
   python3-networkmanager python3-pyinotify python3-simplejson python3-werkzeug \
-  openjdk-17-jre-headless tailscale iotop
+  python3 python3-pip python3-wheel python3-setuptools \
+  samba screen sysstat tailscale telnet temurin-21-jre usbutils util-linux \
+  unzip vfu vfu-yascreen vim vim-runtime wget whiptail xz-utils zip zlib1g
+
 source /opt/openhabian/functions/nodejs-apps.bash
 nodejs_setup
+
 apt-get --quiet autoremove --yes
 rm -f /var/lib/apt/lists/lock
 rm -f /var/cache/apt/archives/lock
