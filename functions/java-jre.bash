@@ -99,7 +99,7 @@ openjdk_fetch_apt() {
   local keyName="debian-bookworm"
 
   echo -n "$(timestamp) [openHABian] Fetching OpenJDK ${1}... "
-  if [[ $1 == "21" ]]; then
+  if is_bookworm && [[ $1 == "21" ]]; then
     if ! cond_redirect add_keys "https://ftp-master.debian.org/keys/archive-key-12.asc" "$keyName"; then echo "FAILED (add keys)"; return 1; fi # Add keys for older systems that need them
     echo "deb [signed-by=/usr/share/keyrings/${keyName}.gpg]  http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.list.d/java.list
     # Avoid release mixing: prevent RPi from using the Debian distro for normal Raspbian packages
@@ -122,7 +122,7 @@ openjdk_install_apt() {
   if ! dpkg -s "openjdk-${1}-jre-headless" &> /dev/null; then # Check if already is installed
     openjdk_fetch_apt "$1"
     echo -n "$(timestamp) [openHABian] Installing OpenJDK ${1}... "
-    if [[ $1 == "21" ]]; then
+    if is_bookworm && [[ $1 == "21" ]]; then
       if cond_redirect apt-get install --yes -o DPkg::Lock::Timeout="$APTTIMEOUT" -t unstable "openjdk-${1}-jre-headless"; then echo "OK"; else echo "FAILED"; return 1; fi
     else
       if cond_redirect apt-get install --yes -o DPkg::Lock::Timeout="$APTTIMEOUT" "openjdk-${1}-jre-headless"; then echo "OK"; else echo "FAILED"; return 1; fi

@@ -211,6 +211,9 @@ We try to setup everything for you so that you don't have to do any additional c
 -   **Language**: By default we set the `locale` setting to `en_US.UTF8` as this tends to be the best for error messages, it can be changed using menu option 32.
 -   **Passwords**: You should change the default password using menu option 34.
 
+NOTE: You should have been configuring timezone and locale at installation time via `openhabian.conf` settings.
+
+
 ##### Default Passwords
 
 For reference, the default username and passwords are as follows:
@@ -254,6 +257,9 @@ The ESPHome configuration files are secured by the openHABbian backup function. 
 ## First boot configuration
 
 Many settings are configurable prior to the first boot of openHABian by changing the key value pairs in the `/boot/openhabian.conf` file on the SD card once you have flashed the initial image onto it.
+
+Most notably you should be setting the timezone and locale this way if yours differ from the defaults.
+Also make sure to read the [Networking] section and eventually preconfigure your Wi-Fi setup before you boot for the first time.
 
 Please note that - in case you use a Windows system for writing the SD card - the `/boot/` partition will be mounted to a drive named `bootfs`. So, e.g. if this drive has the letter `D:`, `/boot/openhabian.conf` will be found as `D:\openhabian.conf`.
 
@@ -406,6 +412,17 @@ clonebranch="openHAB4"
 ```
 :::
 
+#### `openhabpkgversion`
+
+To install a specific version of openhab and openhab-addons packages, use the package version string.
+Leaving this empty will install the latest available packages from the release repo.
+
+::: details Example
+```
+openhabpkgversion=5.1.2-1
+```
+:::
+
 #### `initialconfig`
 
 An initial configuration file to import when setting up openHAB.
@@ -551,6 +568,36 @@ Password to connect to the hotspot when internet is not reachable.
 ::: details Example
 ```
 hotspotpw="openhabian"
+```
+:::
+
+#### `deconz_install`
+
+Enable or disable deCONZ software / Phoscon companion app installation.
+
+::: details Example
+```
+deconz_install="enable"
+```
+:::
+
+#### `deconz_port`
+
+Set the Phoscon Web UI (HTTP) port provided by deCONZ. Default: 8081.
+
+::: details Example
+```
+deconz_port="8081"
+```
+:::
+
+#### `deconz_wsport`
+
+Set the deCONZ WebSocket API port. Default: 8088.
+
+::: details Example
+```
+deconz_wsport="8088"
 ```
 :::
 

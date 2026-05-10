@@ -86,8 +86,8 @@ openhab_setup() {
       fi
     elif [[ $openhabMajorVersion = 5 ]]; then
       if [[ $javaVersion -lt 21 ]] ; then
-        update_config_java "Temurin21"
-        java_install "Temurin21"
+        update_config_java "21"
+        java_install "21"
       fi
     fi
 
@@ -112,7 +112,7 @@ openhab_setup() {
     fi
 
     # shellcheck disable=SC2086
-    if cond_redirect apt-get install --allow-downgrades --yes -o DPkg::Lock::Timeout="$APTTIMEOUT" --option Dpkg::Options::="--force-confnew" $installVersion; then echo "OK"; else echo "FAILED"; return 1; fi
+    if cond_redirect apt-get install --allow-downgrades --allow-change-held-packages --yes -o DPkg::Lock::Timeout="$APTTIMEOUT" --option Dpkg::Options::="--force-confnew" $installVersion; then echo "OK"; else echo "FAILED"; return 1; fi
   else
     echo -n "$(timestamp) [openHABian] Installing cached openHAB version... "
     if cond_redirect apt-get install --yes -o DPkg::Lock::Timeout="$APTTIMEOUT" --option Dpkg::Options::="--force-confnew" ${ohPkgName} ${ohPkgName}-addons; then echo "OK"; else echo "FAILED"; return 1; fi
